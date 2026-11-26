@@ -1,0 +1,155 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>REZX — Why This Exists</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#050505;
+  color:#f2f2f2;
+  font-family:Tahoma,Arial,sans-serif;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 20%,#151515 0,transparent 30%);
+  z-index:-1;
+}
+
+#topbar{
+  position:fixed;
+  top:22px;
+  left:50%;
+  transform:translateX(-50%);
+  height:58px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  z-index:10;
+  background:rgba(10,10,10,.88);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50px;
+}
+
+.brand{
+  color:#f5f5f5;
+  text-decoration:none;
+  font:900 18px Arial,sans-serif;
+  letter-spacing:4px;
+  direction:ltr;
+}
+
+.brand i{
+  color:#888;
+  font-style:normal;
+}
+
+.why-page{
+  min-height:100vh;
+  padding:180px 12% 120px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.kicker{
+  color:#666;
+  font:10px Arial,sans-serif;
+  letter-spacing:4px;
+  direction:ltr;
+}
+
+h1{
+  margin-top:25px;
+  max-width:1000px;
+  font:900 clamp(60px,11vw,150px)/.9 Arial,sans-serif;
+  direction:ltr;
+  letter-spacing:-4px;
+}
+
+.line{
+  width:100px;
+  height:1px;
+  background:#444;
+  margin:50px 0;
+}
+
+.content{
+  max-width:700px;
+}
+
+.content p{
+  color:#999;
+  font-size:16px;
+  line-height:2.5;
+  margin-bottom:25px;
+}
+
+.placeholder{
+  color:#555;
+  font-size:13px;
+  border-right:1px solid #444;
+  padding-right:20px;
+}
+
+@media(max-width:700px){
+  .why-page{
+    padding:150px 8% 80px;
+  }
+
+  h1{
+    font-size:58px;
+    letter-spacing:-2px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header id="topbar">
+  <a href="index.html" class="brand">REZ<i>X</i></a>
+</header>
+
+<main class="why-page">
+
+  <div class="kicker">
+    REZX / THE REASON
+  </div>
+
+  <h1>WHY THIS EXISTS.</h1>
+
+  <div class="line"></div>
+
+  <div class="content">
+
+    <p class="placeholder">
+      اینجا داستان و دلیل واقعی ساخت این بخش از REZX قرار می‌گیرد.
+    </p>
+
+    <p>
+      این صفحه قرار نیست صرفاً درباره معامله‌گری باشد؛ بلکه درباره دلیلی است که این مسیر از ابتدا ساخته شد.
+    </p>
+
+  </div>
+
+</main>
+
+</body>
+</html>
+```

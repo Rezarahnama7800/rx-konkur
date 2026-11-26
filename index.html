@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>REZX</title>
+
+<style>
+:root{
+  --bg:#050505;
+  --line:#252525;
+  --white:#f5f5f5;
+  --muted:#777;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth;direction:rtl}
+
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:Tahoma,Arial,sans-serif;
+  overflow-x:hidden;
+  direction:rtl;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+  background:
+    radial-gradient(circle at 20% 15%,#151515 0,transparent 32%),
+    radial-gradient(circle at 80% 75%,#101010 0,transparent 28%);
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.025;
+  background-image:
+    linear-gradient(#fff 1px,transparent 1px),
+    linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:80px 80px;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  padding:120px 8% 110px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  direction:rtl;
+}
+
+.hero-title{
+  font:900 clamp(85px,20vw,260px)/.78 Arial,sans-serif;
+  letter-spacing:-12px;
+  direction:ltr;
+  unicode-bidi:isolate;
+  background:linear-gradient(105deg,#555,#fff 45%,#777 70%,#eee);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+/* FINANCIAL MANAGEMENT AREA */
+
+.hero-actions{
+  margin-top:55px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  direction:rtl;
+}
+
+/* MAIN BUTTON */
+
+.trading-button{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  width:230px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,.2);
+  color:#ccc;
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.075),
+    rgba(255,255,255,.012)
+  );
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 8px 30px rgba(0,0,0,.25);
+  text-decoration:none;
+  cursor:pointer;
+  font:15px Tahoma,Arial,sans-serif;
+  letter-spacing:.5px;
+  direction:rtl;
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease,
+    transform .35s ease;
+  animation:buttonReveal .9s .2s both;
+}
+
+.trading-button::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255,255,255,.13) 50%,
+    transparent 80%
+  );
+  transform:translateX(-120%);
+  transition:transform .7s ease;
+}
+
+.trading-button:hover{
+  color:#fff;
+  border-color:rgba(255,255,255,.6);
+  background:rgba(255,255,255,.07);
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.4),
+    0 0 22px rgba(255,255,255,.055);
+  transform:translateY(-3px);
+}
+
+.trading-button:hover::before{
+  transform:translateX(120%);
+}
+
+/* DIVISION MENU */
+
+.division-menu{
+  width:min(520px,90vw);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transform:translateY(15px);
+  pointer-events:none;
+  direction:rtl;
+  transition:
+    max-height .45s ease,
+    opacity .35s ease,
+    transform .4s ease;
+}
+
+.division-menu.open{
+  max-height:150px;
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+.division-option{
+  min-width:0;
+  min-height:85px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:10px 5px;
+  border:1px solid rgba(255,255,255,.15);
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.07),
+    rgba(255,255,255,.01)
+  );
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  color:#bbb;
+  text-decoration:none;
+  direction:rtl;
+  text-align:center;
+  transition:
+    color .3s ease,
+    border-color .3s ease,
+    background .3s ease,
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.division-option:hover{
+  color:#fff;
+  border-color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.07);
+  transform:translateY(-4px);
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
+}
+
+.division-option strong{
+  font:15px Tahoma,Arial,sans-serif;
+  letter-spacing:0;
+}
+
+.division-option small{
+  font:9px Tahoma,Arial,sans-serif;
+  color:#777;
+  letter-spacing:0;
+  direction:rtl;
+}
+
+.division-option .cross{
+  font:27px Arial,sans-serif;
+  color:#888;
+  direction:ltr;
+}
+
+/* CONTACT LINKS */
+
+.contact-links{
+  position:absolute;
+  bottom:65px;
+  left:0;
+  width:100%;
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  direction:rtl;
+}
+
+.contact-links a{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  min-width:0;
+  padding:10px 15px;
+  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.055),
+    rgba(255,255,255,.008)
+  );
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  color:#888;
+  text-decoration:none;
+  font:11px Tahoma,Arial,sans-serif;
+  letter-spacing:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045);
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease,
+    transform .35s ease;
+  animation:contactReveal .8s both;
+}
+
+.contact-links a:nth-child(1){animation-delay:.35s}
+.contact-links a:nth-child(2){animation-delay:.5s}
+.contact-links a:nth-child(3){animation-delay:.65s}
+
+.contact-links a::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(
+    110deg,
+    transparent,
+    rgba(255,255,255,.1),
+    transparent
+  );
+  transform:translateX(-120%);
+  transition:transform .7s ease;
+}
+
+.contact-links a:hover{
+  color:#fff;
+  border-color:rgba(255,255,255,.5);
+  background:rgba(255,255,255,.065);
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.3),
+    0 0 18px rgba(255,255,255,.035);
+  transform:translateY(-3px);
+}
+
+.contact-links a:hover::before{
+  transform:translateX(120%);
+}
+
+/* BASIC ANIMATIONS */
+
+@keyframes buttonReveal{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+    filter:blur(5px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+@keyframes contactReveal{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+    filter:blur(4px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+/* REZX CINEMATIC TRANSITION */
+
+.page-transition{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255,255,255,.12),
+      transparent 35%
+    ),
+    #030303;
+}
+
+.page-transition::before{
+  content:"";
+  position:absolute;
+  top:-30%;
+  left:-80%;
+  width:45%;
+  height:160%;
+  transform:skewX(-18deg);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.025) 25%,
+    rgba(255,255,255,.8) 50%,
+    rgba(255,255,255,.08) 75%,
+    transparent
+  );
+  filter:blur(8px);
+}
+
+.page-transition::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:0;
+  background:radial-gradient(
+    circle at center,
+    transparent 0,
+    rgba(0,0,0,.3) 35%,
+    #000 100%
+  );
+}
+
+.page-transition.is-entering{
+  visibility:visible;
+  animation:rezxEnter .95s cubic-bezier(.76,0,.24,1) forwards;
+}
+
+.page-transition.is-entering::before{
+  animation:rezxLight .95s cubic-bezier(.65,0,.25,1) forwards;
+}
+
+.page-transition.is-entering::after{
+  animation:rezxVignette .95s ease forwards;
+}
+
+.page-transition.is-leaving{
+  visibility:visible;
+  animation:rezxExit .65s cubic-bezier(.7,0,.2,1) forwards;
+}
+
+.page-transition.is-leaving::before{
+  animation:rezxLight .65s cubic-bezier(.65,0,.25,1) forwards;
+}
+
+.page-transition.is-leaving::after{
+  animation:rezxVignette .65s ease forwards;
+}
+
+@keyframes rezxEnter{
+  from{opacity:1}
+  to{opacity:0}
+}
+
+@keyframes rezxExit{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes rezxLight{
+  from{left:-80%}
+  to{left:140%}
+}
+
+@keyframes rezxVignette{
+  0%{opacity:.15}
+  50%{opacity:.8}
+  100%{opacity:0}
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+  .hero-title{letter-spacing:-7px}
+
+  .division-menu{
+    width:min(350px,90vw);
+    gap:7px;
+  }
+
+  .division-option{
+    min-height:75px;
+    padding:5px;
+  }
+
+  .division-option strong{font-size:12px}
+  .division-option small{font-size:7px}
+
+  .contact-links{
+    bottom:65px;
+    gap:7px;
+  }
+
+  .contact-links a{
+    padding:9px 11px;
+    font-size:12px;
+  }
+
+  .page-transition::before{
+    width:65%;
+    filter:blur(12px);
+  }
+}
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion:reduce){
+  .trading-button,
+  .contact-links a{
+    animation:none;
+  }
+
+  .page-transition{display:none}
+
+  *,
+  *::before,
+  *::after{
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page-transition" id="pageTransition"></div>
+
+<main class="hero" id="home">
+
+  <h1 class="hero-title">REZX</h1>
+
+  <div class="hero-actions">
+
+    <div class="division-menu" id="divisionMenu">
+
+      <a href="trading.html" class="division-option">
+        <strong>معامله‌گری</strong>
+        <small>۰۱ / بازار</small>
+      </a>
+
+      <a href="finance-02.html" class="division-option">
+        <span class="cross">×</span>
+        <small>۰۲ / بخش دوم</small>
+      </a>
+
+      <a href="finance-03.html" class="division-option">
+        <span class="cross">×</span>
+        <small>۰۳ / بخش سوم</small>
+      </a>
+
+    </div>
+
+    <button
+      type="button"
+      class="trading-button"
+      id="financialButton"
+      aria-expanded="false"
+      aria-controls="divisionMenu">
+
+      <span>مدیریت مالی</span>
+
+    </button>
+
+  </div>
+
+  <div class="contact-links" id="contact">
+
+    <a href="#" target="_blank" rel="noopener noreferrer">اینستاگرام</a>
+    <a href="#" target="_blank" rel="noopener noreferrer">تلگرام</a>
+    <a href="mailto:your@email.com">ایمیل</a>
+
+  </div>
+
+</main>
+
+<script>
+/* FINANCIAL MANAGEMENT MENU */
+
+const financialButton = document.getElementById("financialButton");
+const divisionMenu = document.getElementById("divisionMenu");
+
+financialButton.addEventListener("click", () => {
+  const isOpen = divisionMenu.classList.toggle("open");
+  financialButton.setAttribute("aria-expanded", isOpen);
+});
+
+/* REZX CINEMATIC TRANSITION ENGINE */
+
+(() => {
+  const overlay = document.getElementById("pageTransition");
+  if (!overlay) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reducedMotion) return;
+
+  // ورود سینمایی به صفحه اصلی
+  requestAnimationFrame(() => {
+    overlay.classList.add("is-entering");
+  });
+
+  overlay.addEventListener("animationend", event => {
+    if (event.animationName === "rezxEnter") {
+      overlay.classList.remove("is-entering");
+      overlay.style.visibility = "hidden";
+    }
+  });
+
+  // خروج سینمایی هنگام باز کردن صفحات داخلی
+  document.addEventListener("click", event => {
+    const link = event.target.closest("a");
+    if (!link) return;
+
+    const href = link.getAttribute("href");
+
+    if (
+      !href ||
+      href.startsWith("#") ||
+      href.startsWith("mailto:") ||
+      href.startsWith("tel:") ||
+      link.target === "_blank" ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.altKey
+    ) return;
+
+    const destination = new URL(href, window.location.href);
+
+    if (
+      destination.origin !== window.location.origin ||
+      destination.href === window.location.href
+    ) return;
+
+    event.preventDefault();
+
+    overlay.classList.remove("is-entering");
+    overlay.style.visibility = "visible";
+
+    void overlay.offsetWidth;
+
+    overlay.classList.add("is-leaving");
+
+    let navigated = false;
+
+    const navigate = () => {
+      if (navigated) return;
+      navigated = true;
+      window.location.href = destination.href;
+    };
+
+    overlay.addEventListener("animationend", animationEvent => {
+      if (animationEvent.animationName === "rezxExit") {
+        navigate();
+      }
+    }, { once:true });
+
+    setTimeout(navigate, 850);
+  });
+})();
+</script>
+
+</body>
+</html>
